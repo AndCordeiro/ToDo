@@ -7,7 +7,7 @@ export type TaskType = {
 };
 
 const useList = () => {
-  const [data, setData] = useState<TaskType[]>([]);
+  const [tasks, setTasks] = useState<TaskType[]>([]);
 
   const [task, setTask] = useState<string>('');
   const [isVisible, setVisible] = useState<boolean>(false);
@@ -19,28 +19,28 @@ const useList = () => {
       isChecked: false,
     };
 
-    const newData = [...data, newTask] as TaskType[];
+    const newTasks = [...tasks, newTask] as TaskType[];
 
-    setData(newData);
+    setTasks(newTasks);
     setTask('');
     setVisible(false);
   };
 
   const checkedTask = (id: string) => {
-    const item = data.find(itemData => itemData.id === id) || ({} as TaskType);
-    const newData = data.filter(itemData => itemData.id !== id);
+    const newTask = tasks.find(item => item.id === id) || ({} as TaskType);
+    const newTasks = tasks.filter(item => item.id !== id);
 
-    setData([...newData, {...item, isChecked: !item.isChecked}]);
+    setTasks([...newTasks, {...newTask, isChecked: !newTask.isChecked}]);
   };
 
   const deleteTask = (id: string) => {
-    const newData = data.filter(item => item.id !== id);
+    const newTasks = tasks.filter(item => item.id !== id);
 
-    setData(newData);
+    setTasks(newTasks);
   };
 
   return {
-    data,
+    tasks,
     createTask,
     checkedTask,
     deleteTask,

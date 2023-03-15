@@ -10,7 +10,7 @@ import type {TaskType} from './useList';
 
 const List = () => {
   const {
-    data,
+    tasks,
     checkedTask,
     createTask,
     deleteTask,
@@ -32,27 +32,27 @@ const List = () => {
 
   return (
     <s.Container>
-      {data.filter(item => !item.isChecked).length > 0 && (
+      {tasks.filter(item => !item.isChecked).length > 0 && (
         <>
           <s.Title>Para fazer</s.Title>
           <s.FlatList
-            data={data.filter(item => !item.isChecked)}
+            data={tasks.filter(item => !item.isChecked)}
             renderItem={renderItems}
             keyExtractor={item => item.id}
             showsVerticalScrollIndicator={false}
-            extraData={data}
+            extraData={tasks}
           />
         </>
       )}
-      {data.filter(item => item.isChecked).length > 0 && (
+      {tasks.filter(item => item.isChecked).length > 0 && (
         <>
           <s.Title>Concluído</s.Title>
           <s.FlatList
-            data={data.filter(item => item.isChecked)}
+            data={tasks.filter(item => item.isChecked)}
             renderItem={renderItems}
             keyExtractor={item => item.id}
             showsVerticalScrollIndicator={false}
-            extraData={data}
+            extraData={tasks}
           />
         </>
       )}
